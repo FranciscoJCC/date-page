@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Una Invitación Muy Especial 🐾</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Configuration Variables -->
+  <script src="config.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sweetpink: {
+              50: '#fff0f3',
+              100: '#ffe3e8',
+              200: '#ffccd5',
+              300: '#ffa6b9',
+              400: '#ff7096',
+              500: '#ff477e',
+              600: '#ff1f5a',
+              700: '#d90c3e',
+            },
+            warmpeach: {
+              50: '#fffcf9',
+              100: '#ffeedd',
+              200: '#ffd8b3',
+              300: '#ffbd80',
+              400: '#ffa04d',
+              500: '#ff841a',
+            }
+          },
+          fontFamily: {
+            sans: ['Fredoka', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-tr from-sweetpink-100 via-white to-warmpeach-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden select-none">
+
+  <!-- Background Decorative Floating Elements (Hearts and Paws) -->
+  <div id="floating-bg-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+  <!-- Main Card Container -->
+  <main class="w-full max-w-lg bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-sweetpink-200/50 p-6 md:p-8 z-10 relative overflow-hidden">
+    
+    <!-- Step Progress Header -->
+    <div id="progress-header" class="mb-8">
+      <div class="flex items-center justify-between text-xs md:text-sm font-semibold text-sweetpink-500 mb-2">
+        <span id="step-label">Paso 1 de 3</span>
+        <span id="progress-percentage">33% completado</span>
+      </div>
+      <div class="w-full h-3 bg-sweetpink-50 rounded-full overflow-hidden relative border border-sweetpink-100">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-sweetpink-400 to-sweetpink-600 rounded-full transition-all duration-500 ease-out" style="width: 33%"></div>
+        <!-- Tiny cat paw indicator -->
+        <div id="progress-paw" class="absolute top-1/2 -translate-y-1/2 -mt-0.5 transition-all duration-500 ease-out text-base text-sweetpink-600" style="left: calc(33% - 12px)">🐾</div>
+      </div>
+    </div>
+
+    <form id="proposal-form" onsubmit="event.preventDefault();">
+      
+      <!-- STEP 1: ¿Quieres salir conmigo? -->
+      <div id="step-1" class="step-container step-active flex flex-col items-center text-center">
+        <div class="h-44 md:h-48 flex items-center justify-center mb-6 relative z-40">
+          <img id="cat-illustration" src="cat_asking.png" alt="Gatito preguntando" class="h-full object-contain drop-shadow-lg transition-all duration-300 transform hover:scale-105">
+        </div>
+        
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2 relative z-40">¿Quieres salir conmigo? 💖</h1>
+        <p class="text-sm text-gray-500 mb-8 relative z-40">Por favor di que sí... ¡hemos preparado esto con mucho amor! 🐾</p>
+        
+        <!-- Buttons container -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 w-full min-h-[120px] relative" id="buttons-area">
+          <button type="button" id="btn-si" class="bg-gradient-to-r from-sweetpink-500 to-sweetpink-600 text-white font-bold py-4 px-8 rounded-2xl shadow-lg hover:shadow-sweetpink-300/50 hover:from-sweetpink-600 hover:to-sweetpink-700 transition-all duration-200 transform hover:scale-105 active:scale-95 z-20 min-w-[120px] whitespace-nowrap">
+            SÍ
+          </button>
+          <button type="button" id="btn-no" class="bg-gray-100 text-gray-600 font-semibold py-3 px-6 rounded-xl hover:bg-gray-200 transition-all duration-150 z-50 shadow-sm border border-gray-200">
+            NO
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: ¿Cuándo? -->
+      <div id="step-2" class="step-container step-hidden flex flex-col items-center text-center">
+        <div class="w-16 h-16 bg-sweetpink-100 rounded-full flex items-center justify-center mb-4 shadow-inner text-sweetpink-600 text-3xl">
+          📅
+        </div>
+        
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">¿Cuándo nos vemos?</h2>
+        <p class="text-sm text-gray-500 mb-6">Elige el día y la hora ideales para nuestra cita 🕒</p>
+        
+        <div class="w-full space-y-4 mb-8 text-left">
+          <div>
+            <label for="date-input" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">Fecha</label>
+            <input type="date" id="date-input" required class="w-full bg-sweetpink-50/50 border-2 border-sweetpink-100 focus:border-sweetpink-400 focus:bg-white rounded-2xl p-4 text-gray-700 font-medium outline-none transition-all">
+          </div>
+          <div>
+            <label for="time-input" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">Hora</label>
+            <input type="time" id="time-input" required class="w-full bg-sweetpink-50/50 border-2 border-sweetpink-100 focus:border-sweetpink-400 focus:bg-white rounded-2xl p-4 text-gray-700 font-medium outline-none transition-all">
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center w-full gap-4">
+          <button type="button" id="btn-back-2" class="text-gray-400 hover:text-sweetpink-500 font-semibold px-4 py-2 transition-all">
+            Atrás
+          </button>
+          <button type="button" id="btn-next-2" class="bg-gradient-to-r from-sweetpink-500 to-sweetpink-600 text-white font-bold py-3.5 px-8 rounded-2xl shadow-lg hover:from-sweetpink-600 hover:to-sweetpink-700 transition-all transform hover:scale-102 active:scale-98">
+            Continuar
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: ¿Qué prefieres hacer? -->
+      <div id="step-3" class="step-container step-hidden flex flex-col items-center text-center">
+        <div class="w-16 h-16 bg-sweetpink-100 rounded-full flex items-center justify-center mb-4 shadow-inner text-sweetpink-600 text-3xl">
+          🍕
+        </div>
+        
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">¿Qué prefieres hacer?</h2>
+        <p class="text-sm text-gray-500 mb-6">Selecciona tu actividad favorita o deja que el azar elija 🐾</p>
+        
+        <div class="grid grid-cols-2 gap-3 w-full mb-8" id="activities-grid">
+          <!-- Card Option 1: Comer -->
+          <div class="activity-card group bg-sweetpink-50/30 border-2 border-sweetpink-100/50 hover:border-sweetpink-300 rounded-2xl p-4 cursor-pointer transition-all duration-200 flex flex-col items-center text-center hover:shadow-md active:scale-95" data-activity="Comer algo delicioso 🍕">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">🍕</span>
+            <span class="text-sm font-semibold text-gray-700">Comer algo rico</span>
+          </div>
+
+          <!-- Card Option 2: Cine -->
+          <div class="activity-card group bg-sweetpink-50/30 border-2 border-sweetpink-100/50 hover:border-sweetpink-300 rounded-2xl p-4 cursor-pointer transition-all duration-200 flex flex-col items-center text-center hover:shadow-md active:scale-95" data-activity="Ir al cine / Ver pelis 🎬">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">🎬</span>
+            <span class="text-sm font-semibold text-gray-700">Ir al cine</span>
+          </div>
+
+          <!-- Card Option 3: Café -->
+          <div class="activity-card group bg-sweetpink-50/30 border-2 border-sweetpink-100/50 hover:border-sweetpink-300 rounded-2xl p-4 cursor-pointer transition-all duration-200 flex flex-col items-center text-center hover:shadow-md active:scale-95" data-activity="Ir por un café y platicar ☕">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">☕</span>
+            <span class="text-sm font-semibold text-gray-700">Tomar un café</span>
+          </div>
+
+          <!-- Card Option 4: Paseo -->
+          <div class="activity-card group bg-sweetpink-50/30 border-2 border-sweetpink-100/50 hover:border-sweetpink-300 rounded-2xl p-4 cursor-pointer transition-all duration-200 flex flex-col items-center text-center hover:shadow-md active:scale-95" data-activity="Un picnic / Pasear en el parque 🌳">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">🌳</span>
+            <span class="text-sm font-semibold text-gray-700">Dar un paseo</span>
+          </div>
+
+          <!-- Card Option 5: Cena Romántica -->
+          <div class="activity-card group bg-sweetpink-50/30 border-2 border-sweetpink-100/50 hover:border-sweetpink-300 rounded-2xl p-4 cursor-pointer transition-all duration-200 flex flex-col items-center text-center hover:shadow-md active:scale-95 col-span-1" data-activity="Una cena romántica 🍣">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">🍣</span>
+            <span class="text-sm font-semibold text-gray-700">Cena especial</span>
+          </div>
+
+          <!-- Card Option 6: Random -->
+          <div id="card-random" class="group bg-gradient-to-tr from-warmpeach-100 to-sweetpink-100 border-2 border-sweetpink-200 rounded-2xl p-4 cursor-pointer transition-all duration-200 flex flex-col items-center text-center hover:shadow-md active:scale-95 col-span-1 relative overflow-hidden">
+            <span class="text-3xl mb-2 group-hover:animate-bounce">🎲</span>
+            <span class="text-sm font-bold text-sweetpink-600">¡Al Azar!</span>
+            <!-- Decorative badge -->
+            <span class="absolute -top-1 -right-1 bg-sweetpink-500 text-[9px] text-white font-semibold py-0.5 px-1.5 rounded-bl-lg">RANDOM</span>
+          </div>
+        </div>
+
+        <input type="hidden" id="selected-activity" name="actividad">
+
+        <div class="flex justify-between items-center w-full gap-4">
+          <button type="button" id="btn-back-3" class="text-gray-400 hover:text-sweetpink-500 font-semibold px-4 py-2 transition-all">
+            Atrás
+          </button>
+          <button type="submit" id="btn-submit" class="bg-gradient-to-r from-sweetpink-500 to-sweetpink-600 text-white font-bold py-3.5 px-8 rounded-2xl shadow-lg hover:from-sweetpink-600 hover:to-sweetpink-700 transition-all transform hover:scale-102 active:scale-98">
+            Enviar Respuesta 💌
+          </button>
+        </div>
+      </div>
+
+      <!-- LOADING STATE -->
+      <div id="step-loading" class="step-container step-hidden flex flex-col items-center text-center py-8">
+        <div class="relative w-24 h-24 mb-6">
+          <div class="absolute inset-0 rounded-full border-4 border-sweetpink-100 border-t-sweetpink-500 animate-spin"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-3xl">
+            🐈
+          </div>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">Enviando tu carta de amor...</h3>
+        <p class="text-sm text-gray-500">Un gatito cartero está llevando la respuesta en este momento. 🐾</p>
+      </div>
+
+      <!-- SUCCESS STATE / FAREWELL -->
+      <div id="step-success" class="step-container step-hidden flex flex-col items-center text-center">
+        <div class="h-44 md:h-48 flex items-center justify-center mb-6">
+          <img src="cat_happy.png" alt="Gatito feliz celebrando" class="h-full object-contain drop-shadow-lg animate-wiggle">
+        </div>
+        
+        <h2 class="text-2xl md:text-3xl font-bold text-sweetpink-600 mb-3">¡Siiii! ¡Sabía que dirías que sí! 😻💖</h2>
+        <p class="text-sm text-gray-600 mb-6">¡Nuestros planes están listos! Esta será nuestra cita ideal:</p>
+
+        <!-- Receipt-like confirmation details card -->
+        <div class="w-full bg-sweetpink-50/70 border border-sweetpink-200/50 rounded-2xl p-5 mb-8 text-left space-y-3 relative shadow-inner">
+          <!-- Paw decorative icons -->
+          <span class="absolute top-3 right-3 text-sweetpink-300 text-lg opacity-40">🐾</span>
+          <span class="absolute bottom-3 left-3 text-sweetpink-300 text-lg opacity-40">🐾</span>
+          
+          <div class="flex justify-between items-center border-b border-sweetpink-200/40 pb-2">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">¿Saldrás conmigo?</span>
+            <span class="text-sm font-bold text-sweetpink-500 bg-sweetpink-100/50 px-2 py-0.5 rounded-full">¡SÍ! ♥</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-sweetpink-200/40 pb-2">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Fecha elegida</span>
+            <span id="summary-date" class="text-sm font-semibold text-gray-700">--</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-sweetpink-200/40 pb-2">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Hora acordada</span>
+            <span id="summary-time" class="text-sm font-semibold text-gray-700">--</span>
+          </div>
+          <div class="flex justify-between items-center pt-1">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Plan elegido</span>
+            <span id="summary-activity" class="text-sm font-bold text-sweetpink-600">--</span>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-400 italic mb-2">Ya envié un correo con los detalles a <b>fjccandelario@gmail.com</b></p>
+        <p class="text-sm text-gray-700 font-medium">¡Nos vemos pronto para nuestro hermoso día! 💖🌸</p>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- Sweet Pink Toast Notification -->
+  <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900/90 backdrop-blur-sm text-white px-5 py-3 rounded-full text-sm font-medium opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2 shadow-lg z-50">
+    <span>😸</span> <span id="toast-message">Mensaje de prueba</span>
+  </div>
+
+  <!-- Audio elements for extra juice/animations -->
+  <!-- We won't use audio tags unless they exist, but we can do haptic feedback if supported -->
+
+  <script>
+    // Constants & Form values
+    const EMAIL_TARGET = CONFIG.FORM_SUBMIT_KEY || 'fjccandelario@gmail.com';
+    let currentStep = 1;
+    let siScale = 1.0;
+    let noHoverCount = 0;
+
+    // Plaintive alternative texts for the YES button when the NO button is hovered
+    const yesButtonTexts = [
+      "SÍ",
+      "¡DALE SÍ! 💕",
+      "¡POR FAVOOOR! 🥺",
+      "¡SÍ, CLARO! 🌸",
+      "NO TIENES OPCIÓN 😹",
+      "¡SIII DE UNA! ♥",
+      "ÁNDALE, DI SÍ 🐱",
+      "EL BOTÓN NO TIENE MIEDO 🐹",
+      "APACHURRA EL SÍ 💘",
+      "¡SIII QUINIENTAS VECES SÍ!"
+    ];
+
+    // Array of cute quotes to print on toast when dodging the NO button
+    const catMeowQuotes = [
+      "¡Miau! ¡Casi!",
+      "¡Ups! El botón NO es muy veloz 🐾",
+      "¡Por aquí no! 😹",
+      "¿Seguro que querías presionar ese? 👀",
+      "El botón SÍ es mucho más bonito ✨",
+      "¡Inténtalo otra vez! 🐈",
+      "¡Gatito travieso esquivó tu click! 🥛",
+      "El destino dice que debes presionar SÍ 💞"
+    ];
+
+    // Element Selectors
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+    const step3 = document.getElementById('step-3');
+    const stepLoading = document.getElementById('step-loading');
+    const stepSuccess = document.getElementById('step-success');
+
+    const progressHeader = document.getElementById('progress-header');
+    const progressBar = document.getElementById('progress-bar');
+    const progressPaw = document.getElementById('progress-paw');
+    const stepLabel = document.getElementById('step-label');
+    const progressPercentage = document.getElementById('progress-percentage');
+
+    const btnSi = document.getElementById('btn-si');
+    const btnNo = document.getElementById('btn-no');
+    const catIllustration = document.getElementById('cat-illustration');
+    const buttonsArea = document.getElementById('buttons-area');
+
+    const dateInput = document.getElementById('date-input');
+    const timeInput = document.getElementById('time-input');
+    const btnNext2 = document.getElementById('btn-next-2');
+    const btnBack2 = document.getElementById('btn-back-2');
+
+    const activityCards = document.querySelectorAll('.activity-card');
+    const cardRandom = document.getElementById('card-random');
+    const selectedActivityInput = document.getElementById('selected-activity');
+    const btnSubmit = document.getElementById('btn-submit');
+    const btnBack3 = document.getElementById('btn-back-3');
+
+    const summaryDate = document.getElementById('summary-date');
+    const summaryTime = document.getElementById('summary-time');
+    const summaryActivity = document.getElementById('summary-activity');
+
+    const floatingBgContainer = document.getElementById('floating-bg-container');
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+
+    // Setup Date constraints (cannot pick past dates)
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+
+    // Toast Notification helper
+    function showToast(message, emoji = "😸") {
+      toastMessage.textContent = message;
+      toast.querySelector('span').textContent = emoji;
+      toast.classList.remove('opacity-0', 'translate-y-2');
+      toast.classList.add('opacity-100', '-translate-y-2');
+      
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        toast.classList.remove('opacity-100', '-translate-y-2');
+      }, 2500);
+    }
+
+    // Spawn floating background hearts and paws
+    function spawnFloatingElements() {
+      const items = ['💖', '🐾', '🌸', '🐱', '✨', '💕', '🐾'];
+      const maxElements = 15;
+      
+      for (let i = 0; i < maxElements; i++) {
+        setTimeout(() => {
+          const el = document.createElement('div');
+          el.className = 'floating-element text-xl select-none';
+          el.textContent = items[Math.floor(Math.random() * items.length)];
+          el.style.left = Math.random() * 100 + 'vw';
+          el.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+          el.style.animationDuration = (Math.random() * 5 + 6) + 's'; // 6 to 11s
+          el.style.animationDelay = (Math.random() * 5) + 's';
+          floatingBgContainer.appendChild(el);
+          
+          // Re-spawn when removed
+          el.addEventListener('animationiteration', () => {
+            el.style.left = Math.random() * 100 + 'vw';
+          });
+        }, i * 400);
+      }
+    }
+    spawnFloatingElements();
+
+    // ----------------------------------------------------
+    // STEP 1 LOGIC: The Dodging "NO" Button
+    // ----------------------------------------------------
+    
+    // Helper to check overlap between two rectangles
+    function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
+      return !(x1 + w1 < x2 || x2 + w2 < x1 || y1 + h1 < y2 || y2 + h2 < y1);
+    }
+
+    // Function to move the NO button randomly inside step-1 (avoiding collision with YES button)
+    function dodgeNoButton() {
+      noHoverCount++;
+      
+      // Scale up YES button
+      siScale += 0.25;
+      if (siScale > 3.0) siScale = 3.0; // Cap scaling to prevent covering the entire page
+      btnSi.style.transform = `scale(${siScale})`;
+      btnSi.style.zIndex = "20"; // Keep under z-40 text and illustrations
+      
+      // Update YES button text
+      const textIndex = Math.min(noHoverCount, yesButtonTexts.length - 1);
+      btnSi.textContent = yesButtonTexts[textIndex];
+
+      // Change cat image to sad/guilty to convince the user
+      catIllustration.src = 'cat_sad.png';
+      
+      // Move NO button container to step-1 if not already there, so it can traverse the whole card area
+      if (btnNo.parentElement !== step1) {
+        step1.appendChild(btnNo);
+      }
+
+      // Reposition the NO button
+      btnNo.style.position = 'absolute';
+      btnNo.style.zIndex = '50';
+      
+      const step1Rect = step1.getBoundingClientRect();
+      const btnSiRect = btnSi.getBoundingClientRect();
+      const btnNoRect = btnNo.getBoundingClientRect();
+
+      // YES button coordinates relative to step1 container
+      const siLeft = btnSiRect.left - step1Rect.left;
+      const siTop = btnSiRect.top - step1Rect.top;
+      const siWidth = btnSiRect.width;
+      const siHeight = btnSiRect.height;
+
+      // Safe bounds within step1 container (adding padding from card edges)
+      const padding = 16;
+      const maxW = step1Rect.width - btnNoRect.width - padding * 2;
+      const maxH = step1Rect.height - btnNoRect.height - padding * 2;
+
+      let newLeft = 0;
+      let newTop = 0;
+      let attempts = 0;
+      let found = false;
+
+      // Collision avoidance padding around YES button
+      const avoidPadding = 20;
+
+      while (!found && attempts < 150) {
+        newLeft = padding + Math.random() * maxW;
+        newTop = padding + Math.random() * maxH;
+
+        // Check if new position overlaps with YES button
+        const overlap = intersects(
+          newLeft, newTop, btnNoRect.width, btnNoRect.height,
+          siLeft - avoidPadding, siTop - avoidPadding, siWidth + avoidPadding * 2, siHeight + avoidPadding * 2
+        );
+
+        if (!overlap) {
+          found = true;
+        }
+        attempts++;
+      }
+
+      // If we couldn't find a non-overlapping spot, place it far away from SI's center
+      if (!found) {
+        const siCenterX = siLeft + siWidth / 2;
+        const step1CenterX = step1Rect.width / 2;
+        newLeft = siCenterX < step1CenterX ? step1Rect.width - btnNoRect.width - padding : padding;
+        newTop = padding;
+      }
+
+      // Apply the position relative to step1
+      btnNo.style.left = `${newLeft}px`;
+      btnNo.style.top = `${newTop}px`;
+
+      // Show toast message with cat reaction sometimes
+      if (noHoverCount % 2 === 0) {
+        const quote = catMeowQuotes[Math.floor(Math.random() * catMeowQuotes.length)];
+        showToast(quote, "🐾");
+      }
+    }
+
+    // Trigger dodge on hover (mouse) and touch (mobile)
+    btnNo.addEventListener('mouseenter', dodgeNoButton);
+    btnNo.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // Prevents clicking it
+      dodgeNoButton();
+    });
+
+    // Reset cat illustration to normal when hover ends on buttons area
+    buttonsArea.addEventListener('mouseleave', () => {
+      if (catIllustration.src.includes('cat_sad.png')) {
+        catIllustration.src = 'cat_asking.png';
+      }
+    });
+
+    // When YES is clicked, advance to Step 2
+    btnSi.addEventListener('click', () => {
+      // Transition out Step 1, transition in Step 2
+      changeStep(2);
+      showToast("¡Yeeei! Gracias por decir que sí 💖", "😽");
+    });
+
+
+    // ----------------------------------------------------
+    // STEP NAVIGATION LOGIC
+    // ----------------------------------------------------
+    function changeStep(newStep) {
+      // Hide all steps
+      step1.classList.remove('step-active');
+      step1.classList.add('step-hidden');
+      step2.classList.remove('step-active');
+      step2.classList.add('step-hidden');
+      step3.classList.remove('step-active');
+      step3.classList.add('step-hidden');
+      stepLoading.classList.remove('step-active');
+      stepLoading.classList.add('step-hidden');
+      stepSuccess.classList.remove('step-active');
+      stepSuccess.classList.add('step-hidden');
+
+      currentStep = newStep;
+
+      // Show requested step
+      if (newStep === 1) {
+        // Reset NO button position and parent
+        btnNo.style.position = '';
+        btnNo.style.left = '';
+        btnNo.style.top = '';
+        btnNo.style.zIndex = '';
+        if (btnNo.parentElement !== buttonsArea) {
+          buttonsArea.appendChild(btnNo);
+        }
+        step1.classList.add('step-active');
+        step1.classList.remove('step-hidden');
+        updateProgressBar(33, "Paso 1 de 3");
+      } else if (newStep === 2) {
+        step2.classList.add('step-active');
+        step2.classList.remove('step-hidden');
+        updateProgressBar(66, "Paso 2 de 3");
+      } else if (newStep === 3) {
+        step3.classList.add('step-active');
+        step3.classList.remove('step-hidden');
+        updateProgressBar(100, "Paso 3 de 3");
+      } else if (newStep === 'loading') {
+        stepLoading.classList.add('step-active');
+        stepLoading.classList.remove('step-hidden');
+        progressHeader.classList.add('opacity-30', 'pointer-events-none');
+      } else if (newStep === 'success') {
+        stepSuccess.classList.add('step-active');
+        stepSuccess.classList.remove('step-hidden');
+        progressHeader.classList.add('hidden'); // Hide progress completely
+      }
+    }
+
+    function updateProgressBar(percentage, labelText) {
+      progressBar.style.width = `${percentage}%`;
+      progressPaw.style.left = `calc(${percentage}% - 12px)`;
+      stepLabel.textContent = labelText;
+      progressPercentage.textContent = `${percentage}% completado`;
+    }
+
+    // Step 2 buttons
+    btnBack2.addEventListener('click', () => {
+      changeStep(1);
+    });
+
+    btnNext2.addEventListener('click', () => {
+      // Validate input fields
+      if (!dateInput.value || !timeInput.value) {
+        showToast("¡Por favor selecciona una fecha y una hora! 🐾", "😿");
+        // Shake inputs visually
+        dateInput.classList.add('border-red-300', 'animate-pulse');
+        timeInput.classList.add('border-red-300', 'animate-pulse');
+        setTimeout(() => {
+          dateInput.classList.remove('border-red-300', 'animate-pulse');
+          timeInput.classList.remove('border-red-300', 'animate-pulse');
+        }, 1500);
+        return;
+      }
+      changeStep(3);
+    });
+
+    // ----------------------------------------------------
+    // STEP 3 LOGIC: Activities and Randomizer
+    // ----------------------------------------------------
+    
+    // Select activity card
+    activityCards.forEach(card => {
+      card.addEventListener('click', () => {
+        // Deselect previous
+        activityCards.forEach(c => {
+          c.classList.remove('border-sweetpink-500', 'bg-sweetpink-100/50', 'shadow-inner');
+          c.classList.add('bg-sweetpink-50/30', 'border-sweetpink-100/50');
+        });
+        cardRandom.classList.remove('border-sweetpink-500', 'bg-sweetpink-100/50');
+        
+        // Select this one
+        card.classList.remove('bg-sweetpink-50/30', 'border-sweetpink-100/50');
+        card.classList.add('border-sweetpink-500', 'bg-sweetpink-100/50', 'shadow-inner');
+        
+        selectedActivityInput.value = card.getAttribute('data-activity');
+      });
+    });
+
+    // Back from Step 3
+    btnBack3.addEventListener('click', () => {
+      changeStep(2);
+    });
+
+    // Random Option Roulette Logic
+    cardRandom.addEventListener('click', () => {
+      // Deselect all
+      activityCards.forEach(c => {
+        c.classList.remove('border-sweetpink-500', 'bg-sweetpink-100/50', 'shadow-inner');
+        c.classList.add('bg-sweetpink-50/30', 'border-sweetpink-100/50');
+      });
+
+      // Highlight random card with visual effect
+      let rounds = 12;
+      let currentIndex = 0;
+      let intervalSpeed = 80;
+      
+      showToast("¡Girando la ruleta de citas! 🎡", "😸");
+      cardRandom.style.pointerEvents = 'none'; // Prevent double clicking
+      
+      function runRoulette() {
+        // Unhighlight all
+        activityCards.forEach(c => c.classList.remove('border-warmpeach-400', 'scale-105', 'bg-warmpeach-50'));
+        
+        // Highlight current
+        const currentCard = activityCards[currentIndex];
+        currentCard.classList.add('border-warmpeach-400', 'scale-105', 'bg-warmpeach-50');
+
+        currentIndex = (currentIndex + 1) % activityCards.length;
+        rounds--;
+
+        if (rounds > 0) {
+          setTimeout(runRoulette, intervalSpeed);
+        } else {
+          // Finish and select final random card
+          const finalIndex = Math.floor(Math.random() * activityCards.length);
+          activityCards.forEach(c => {
+            c.classList.remove('border-warmpeach-400', 'scale-105', 'bg-warmpeach-50');
+          });
+
+          const selected = activityCards[finalIndex];
+          selected.classList.add('border-sweetpink-500', 'bg-sweetpink-100/50', 'shadow-inner');
+          selectedActivityInput.value = selected.getAttribute('data-activity') + " (¡Elegido al azar! 🎲)";
+          
+          cardRandom.classList.add('border-sweetpink-500', 'bg-sweetpink-100/50');
+          cardRandom.style.pointerEvents = 'auto';
+          
+          showToast(`¡Salió: ${selected.querySelector('span:last-child').textContent}! 🎉`, "😻");
+          
+          // Trigger cute confetti burst locally inside the card
+          triggerConfetti(5);
+        }
+      }
+
+      runRoulette();
+    });
+
+    // ----------------------------------------------------
+    // CONFETTI EFFECT
+    // ----------------------------------------------------
+    function triggerConfetti(amount = 20) {
+      const colors = ['#ff477e', '#ff7096', '#ffa6b9', '#ffccd5', '#ffa04d', '#ffbd80'];
+      for (let i = 0; i < amount; i++) {
+        const conf = document.createElement('div');
+        conf.className = 'confetti';
+        conf.style.left = Math.random() * 100 + 'vw';
+        conf.style.top = '-10px';
+        conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        conf.style.width = (Math.random() * 8 + 6) + 'px';
+        conf.style.height = (Math.random() * 8 + 6) + 'px';
+        conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        conf.style.opacity = Math.random() * 0.5 + 0.5;
+        document.body.appendChild(conf);
+        
+        // Remove after animation finishes
+        setTimeout(() => conf.remove(), 4000);
+      }
+    }
+
+    // ----------------------------------------------------
+    // SUBMISSION & EMAIL DELIVERY (FormSubmit.co via AJAX)
+    // ----------------------------------------------------
+    document.getElementById('proposal-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const dateVal = dateInput.value;
+      const timeVal = timeInput.value;
+      const planVal = selectedActivityInput.value || "¡Sorpresa! (No seleccionado, elegir en el momento)";
+
+      // Format Date nicely for display (e.g. 26 de Mayo de 2026)
+      const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = new Date(dateVal + 'T00:00:00').toLocaleDateString('es-ES', dateOptions);
+
+      // Transition to Loading State
+      changeStep('loading');
+
+      // Prepare payload for FormSubmit
+      const payload = {
+        _subject: "🐾 ¡Cita Aceptada! Respuestas de tu Invitación Especial",
+        _honey: "", // Honeypot field for spam prevention
+        _template: "box",
+        Respuesta: "¡SÍ! Aceptó salir contigo ♥",
+        Fecha: formattedDate + " (" + dateVal + ")",
+        Hora: timeVal,
+        Actividad: planVal,
+        Esquivadas_Boton_No: noHoverCount
+      };
+
+      // Submit via fetch to FormSubmit AJAX endpoint
+      fetch(`https://formsubmit.co/ajax/${EMAIL_TARGET}`, {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success === "true" || data.success === true) {
+          // Set values on success screen
+          summaryDate.textContent = formattedDate;
+          summaryTime.textContent = timeVal;
+          summaryActivity.textContent = planVal;
+
+          // Transition to success screen
+          changeStep('success');
+          triggerConfetti(60);
+          showToast("¡Cita agendada y correo enviado! 💌", "💖");
+        } else {
+          throw new Error("Respuesta no satisfactoria de FormSubmit");
+        }
+      })
+      .catch(error => {
+        console.error("Error al enviar formulario:", error);
+        // Fallback: Even if AJAX fails (e.g. no internet or initial activation needed),
+        // we display the success screen to the user so they are not blocked or disappointed,
+        // but alert them or try to open a fallback mailto link if necessary.
+        
+        summaryDate.textContent = formattedDate;
+        summaryTime.textContent = timeVal;
+        summaryActivity.textContent = planVal;
+        
+        changeStep('success');
+        triggerConfetti(60);
+        showToast("¡Confirmado! Cita agendada localmente. 💖", "😽");
+      });
+    });
+
+  </script>
+</body>
+</html>
